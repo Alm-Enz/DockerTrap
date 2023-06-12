@@ -1,9 +1,9 @@
 #!/bin/bash
 dock_ip="$@"
  
-facility=$(echo $dock_ip | cut -d'|||||' -f2)
-dock_ip_formated=$(echo $dock_ip | cut -d'|||||' -f1)
-msg=$(echo $dock_ip | cut -d'|||||' -f3)
+facility=$(echo $dock_ip | cut -d'<DELIM>' -f2)
+dock_ip_formated=$(echo $dock_ip | cut -d'<DELIM>' -f1)
+msg=$(echo $dock_ip | cut -d'<DELIM>' -f3)
 #echo "msg="$msg" & facility="$facility >> /tmp/test
 #dock_ip_formated=$(echo $dock_ip | cut -d'/' -f5)
  

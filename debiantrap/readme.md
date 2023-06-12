@@ -1,39 +1,35 @@
-Procedure (Debian11)
-
+# Procedure (Debian11)
+~~~ shell
 sudo apt -y install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt update
 sudo apt -y install socat xinetd auditd netcat-openbsd git docker-ce
 git clone https://github.com/mrhavens/DockerTrap
+~~~
 
 nano /etc/services -> ssh 2222/tcp et honeypot 22/tcp
+
+~~~ shell
 cd DockerTrap  
 cp honeypot/h* /usr/bin/
-Nano /etc/xinetd.d/honeypot   ------------------------------------------------->
-Systemctl restart xinetd
-mkdir debiantrap && cd debiantrap && mkdir /var/log/remote
-touch Dockerfile
-touch start.sh
+cp xinted.d/honeypot /etc/xinetd.d/honeypot
+systemctl restart xinetd
 docker build -t honeypot:latest .
 echo "*/5 * * * * root /usr/bin/honeypot.clean" >> /etc/crontab
-
-nano /usr/local/bin/log.sh
+cp log.sh /usr/local/bin/
 chmod 775 /usr/local/bin/log.sh
+~~~
 
-/etc/rsyslog.conf:
-module(load="imtcp")
-input(type="imtcp" port="514")
-$template message, "%fromhost%|||||%syslogfacility-text%|||||%msg%”
-if $fromhost contains '172.17.0' then ^/usr/local/bin/log.sh;message
+copy rsyslog.conf lines to /etc/rsyslog.conf
 
 
-
-
+~~~ shell
 sudo systemctl restart rsyslog
-
-#Penser à créer index HoneyPot sur SplunkServer
-#Install splunk forwarder and config
+~~~
+# Penser à créer index HoneyPot sur SplunkServer
+# Install splunk forwarder and config
+~~~ shell
 wget https://download.splunk.com/products/universalforwarder/releases/9.0.4/linux/splunkforwarder-9.0.4-de405f4a7979-linux-2.6-amd64.deb
 
 dpkg -i splunkforwarder-9.0.4-de405f4a7979-linux-2.6-amd64.deb
@@ -42,3 +38,4 @@ dpkg -i splunkforwarder-9.0.4-de405f4a7979-linux-2.6-amd64.deb
 
 /opt/splunkforwarder/bin/splunk add monitor /var/log/remote -index HoneyPot -sourcetype Dockertrap
 /opt/splunkforwarder/bin/splunk add forward-server hostname:9997
+~~~
