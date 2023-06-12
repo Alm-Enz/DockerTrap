@@ -5,7 +5,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt update
 sudo apt -y install socat xinetd auditd netcat-openbsd git docker-ce
-git clone https://github.com/mrhavens/DockerTrap
+git clone https://github.com/Alm-Enz/DockerTrap
 ~~~
 
 nano /etc/services -> ssh 2222/tcp et honeypot 22/tcp
