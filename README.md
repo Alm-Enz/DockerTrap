@@ -1,4 +1,5 @@
 # DockerTrap
+# Un nouveau README est présent dans le dossier DEBIANTRAP (version améliorée)
 
 <div align="center">
 	<img width="450" src="dockertrap.png">
