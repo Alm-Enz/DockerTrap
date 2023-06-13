@@ -1,8 +1,8 @@
 #SSH Server
 #VERSION 0.0.1
 
-#Base Image
-FROM debian:latest
+#Base Image Debian11
+FROM debian:bullseye
 
 #Maintainer Info.
 #MAINTAINER Almond CWATCH
