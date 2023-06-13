@@ -37,6 +37,6 @@ dpkg -i splunkforwarder-9.0.4-de405f4a7979-linux-2.6-amd64.deb
 /opt/splunkforwarder/bin/splunk enable boot-start --accept-license --answer-yes
 /opt/splunkforwarder/bin/splunk start
 
-/opt/splunkforwarder/bin/splunk add monitor /var/log/remote -index HoneyPot -sourcetype Dockertrap
+/opt/splunkforwarder/bin/splunk add monitor /var/log/HP -index HoneyPot -sourcetype Dockertrap
 /opt/splunkforwarder/bin/splunk add forward-server hostname:9997
 ~~~
