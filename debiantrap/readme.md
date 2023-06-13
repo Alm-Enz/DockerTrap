@@ -13,6 +13,7 @@ nano /etc/services -> ssh 2222/tcp et honeypot 22/tcp
 ~~~ shell
 cd DockerTrap  
 cp honeypot/h* /usr/bin/
+cp debiantrap
 cp xinted.d/honeypot /etc/xinetd.d/honeypot
 systemctl restart xinetd
 docker build -t honeypot:latest .
