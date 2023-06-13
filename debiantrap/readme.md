@@ -41,4 +41,4 @@ dpkg -i splunkforwarder-9.0.4-de405f4a7979-linux-2.6-amd64.deb
 /opt/splunkforwarder/bin/splunk add forward-server hostname:9997
 ~~~
 
-Splunk search : index=HoneyPot source!=/var/log/HP/debian/* (source=/var/log/HP/*/local6 OR source=/var/log/HP/*/auth)
+Splunk search : index=HoneyPot source!=/var/log/HP/debian/* (source=/var/log/HP/\*/local6 OR source=/var/log/HP/\*/auth)
