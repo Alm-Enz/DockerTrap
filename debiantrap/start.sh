@@ -12,6 +12,7 @@ echo 'local6.* /var/log/commands.log' >> /etc/rsyslog.conf
 echo '/var/log/commands.log' >> /etc/logrotate.d/rsyslog
 echo '. /etc/bashrc' >> ~/.bashrc
 echo '\n' >> /etc/bashrc
+echo 'PrintLastLog no' >> /etc/ssh/ssh_config
 
 echo 'service rsyslog stop > /dev/null 2>&1' >> /etc/bashrc
 echo 'service rsyslog start > /dev/null 2>&1' >> /etc/bashrc
