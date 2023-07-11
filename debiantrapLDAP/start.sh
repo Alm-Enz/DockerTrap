@@ -59,4 +59,4 @@ cp /tmp/LDAP/pam-ad /usr/share/pam-configs/my-ad
 cp /tmp/LDAP/ad-linux-admins /etc/sudoers.d/ad-linux-admins
 cp /tmp/LDAP/join-ad.sh .
 chmod +x join-ad.sh
-bash join-ad.sh
+bash join-ad.sh "DECEPTIVE\reader" "Admin123#"

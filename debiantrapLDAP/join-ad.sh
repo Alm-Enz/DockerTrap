@@ -8,13 +8,14 @@
 #
 # Note that it is very important that the hostname of the machine is set up correctly!
 
-if [ "$#" != 1 ]
+if [ "$#" != 2 ]
 then
-  echo "Usage: join-ad.sh username"
+  echo "Usage: join-ad.sh username password"
   exit 1
 fi
 
 username=$1
+pass=$2
 domain=$(hostname --domain)
 echo "Using account ${username} to join domain ${domain}..."
 echo ""
@@ -35,7 +36,8 @@ upper_short_hostname=$(echo ${short_hostname} | tr [a-z] [A-Z])
 # Log into the domain as the administrator, asking user for password
 # The domain part must be in upper-case
 echo "Logging into domain as the administrator"
-/usr/bin/kinit "${username}@${upper_domain}"
+/usr/bin/kinit "${username}@${upper_domain}" -k "${pass}"
+echo "${pass}"
 echo ""
 
 # List what kerberos sent back
