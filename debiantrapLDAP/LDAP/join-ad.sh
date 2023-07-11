@@ -8,14 +8,13 @@
 #
 # Note that it is very important that the hostname of the machine is set up correctly!
 
-if [ "$#" != 2 ]
+if [ "$#" != 1 ]
 then
-  echo "Usage: join-ad.sh username password"
+  echo "Usage: join-ad.sh username"
   exit 1
 fi
 
 username=$1
-pass=$2
 domain=$(hostname --domain)
 echo "Using account ${username} to join domain ${domain}..."
 echo ""
@@ -36,8 +35,7 @@ upper_short_hostname=$(echo ${short_hostname} | tr [a-z] [A-Z])
 # Log into the domain as the administrator, asking user for password
 # The domain part must be in upper-case
 echo "Logging into domain as the administrator"
-/usr/bin/kinit "${username}@${upper_domain}" -k "${pass}"
-echo "${pass}"
+/usr/bin/kinit "${username}@${upper_domain}"
 echo ""
 
 # List what kerberos sent back
@@ -83,8 +81,9 @@ else
 
     # Now restart SSSD and everything should be happy :-)
     echo "Enabling and restarting sssd"
-    systemctl enable sssd
-    systemctl restart sssd
+    #systemctl enable sssd
+    #systemctl restart sssd
+    service sssd start
     if [ $? -ne 0 ]
     then
       echo "Error: could not start the System Security Services Daemon (SSSD)"
