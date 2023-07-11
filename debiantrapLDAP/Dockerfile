@@ -11,7 +11,7 @@ FROM debian:bullseye
 RUN apt-get update \
     && apt-get install -y openssh-server \
    # && apt-get install -y mysql-client \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -yq rsyslog ntp krb5-user samba samba-common sssd iputils-ping net-tools
+    && DEBIAN_FRONTEND=noninteractive apt-get install -yq rsyslog ntp krb5-user samba samba-common sssd iputils-ping iproute2
 #Establish the operating directory of OpenSSH
 RUN mkdir /var/run/sshd
 RUN service rsyslog start
