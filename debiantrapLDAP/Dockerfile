@@ -27,13 +27,15 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional \
     pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 #Copy all required files
-RUN mkdir /tmp/LDAP
-COPY ntp.conf /tmp/LDAP/
-COPY join-ad.sh /tmp/LDAP/
-COPY pam-ad /tmp/LDAP/
-COPY smb.conf /tmp/LDAP/
-COPY sssd.conf /tmp/LDAP/
-COPY ad-linux-admins /tmp/LDAP/
+#RUN mkdir /tmp/LDAP
+COPY LDAP/ /tmp/
+#COPY ntp.conf /tmp/LDAP/
+#COPY krb5.conf /tmp/LDAP/
+#COPY join-ad.sh /tmp/LDAP/
+#COPY pam-ad /tmp/LDAP/
+#COPY smb.conf /tmp/LDAP/
+#COPY sssd.conf /tmp/LDAP/
+#COPY ad-linux-admins /tmp/LDAP/
 
 COPY start.sh /tmp/
 RUN bash /tmp/start.sh
