@@ -11,7 +11,6 @@ FROM debian:bullseye
 RUN apt-get update \
     && apt-get install -y openssh-server \
    # && apt-get install -y mysql-client \
-    && apt-get install -y tcpdump \
     && apt-get install -y rsyslog
 #Establish the operating directory of OpenSSH
 RUN mkdir /var/run/sshd
