@@ -57,6 +57,6 @@ cp /tmp/LDAP/pam-ad /usr/share/pam-configs/my-ad
 /usr/sbin/pam-auth-update --package
 
 cp /tmp/LDAP/ad-linux-admins /etc/sudoers.d/ad-linux-admins
-cp /tmp/LDAP/join-ad.sh .
-chmod +x join-ad.sh
-echo "Admin123#"|bash join-ad.sh "DECEPTIVE\reader"
+cp /tmp/LDAP/join-ad.sh /root/
+chmod +x /root/join-ad.sh
+#echo "Admin123#"|bash join-ad.sh "DECEPTIVE\reader"
