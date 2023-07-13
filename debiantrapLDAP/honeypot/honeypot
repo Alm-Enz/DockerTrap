@@ -43,12 +43,12 @@ REMOTE_HOST=`echo ${REMOTE_HOST} | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1
         /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 172.17.0.1 --dport 464 -j ACCEPT
         /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 172.17.0.1 --dport 139 -j ACCEPT
         /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 172.17.0.1 --dport 445 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 88 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME}--dport 749 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 4444 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 464 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 139 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 445 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${DC_IP} --dport 88 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${DC_IP}--dport 749 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${DC_IP} --dport 4444 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${DC_IP} --dport 464 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${DC_IP} --dport 139 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${DC_IP} --dport 445 -j ACCEPT
 
 	# add iptables redirection rule
 	/sbin/iptables -t nat -A PREROUTING -i ${EXT_IFACE} -s ${REMOTE_HOST} -p tcp --dport ${SERVICE} -j DNAT --to-destination ${CONTAINER_IP}
