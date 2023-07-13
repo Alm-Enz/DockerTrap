@@ -6,7 +6,8 @@ FROM debian:bullseye
 
 #Maintainer Info.
 #MAINTAINER Almond CWATCH
-
+ADD LDAP/resolv.conf /etc/resolv.conf.override
+CMD cp /etc/resolv.conf.override /etc/resolv.conf
 #Update APT repository & Install OpenSSH
 RUN apt-get update \
     && apt-get install -y openssh-server \
