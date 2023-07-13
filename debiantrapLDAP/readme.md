@@ -28,6 +28,8 @@ copy rsyslog.conf lines to /etc/rsyslog.conf
 ~~~ shell
 sudo systemctl restart rsyslog
 ~~~
+
+# https://wiki.debian.org/AuthenticatingLinuxWithActiveDirectorySssd
 # Penser à créer index HoneyPot sur SplunkServer
 # Install splunk forwarder and config
 ~~~ shell
