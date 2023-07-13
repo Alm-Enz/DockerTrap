@@ -4,6 +4,8 @@ EXT_IFACE=ens4
 MEM_LIMIT=128M
 SERVICE=22
 
+DC_IP=192.168.89.130
+
 QUOTA_IN=5242880
 QUOTA_OUT=1310720
 REMOTE_HOST=`echo ${REMOTE_HOST} | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
@@ -41,12 +43,12 @@ REMOTE_HOST=`echo ${REMOTE_HOST} | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1
         /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 172.17.0.1 --dport 464 -j ACCEPT
         /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 172.17.0.1 --dport 139 -j ACCEPT
         /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 172.17.0.1 --dport 445 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 192.168.89.130 --dport 88 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 192.168.89.130--dport 749 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 192.168.89.130 --dport 4444 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 192.168.89.130 --dport 464 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 192.168.89.130 --dport 139 -j ACCEPT
-        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst 192.168.89.130 --dport 445 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 88 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME}--dport 749 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 4444 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 464 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 139 -j ACCEPT
+        /usr/bin/nsenter --target ${PROCESS_ID} -n /sbin/iptables -A OUTPUT -p tcp -m tcp --dst ${HOSTNAME} --dport 445 -j ACCEPT
 
 	# add iptables redirection rule
 	/sbin/iptables -t nat -A PREROUTING -i ${EXT_IFACE} -s ${REMOTE_HOST} -p tcp --dport ${SERVICE} -j DNAT --to-destination ${CONTAINER_IP}
