@@ -3,7 +3,7 @@
 EXT_IFACE=ens4
 MEM_LIMIT=128M
 SERVICE=22
-
+DOMAIN=deceptive.local
 DC_IP=192.168.89.130
 
 QUOTA_IN=5242880
@@ -17,7 +17,7 @@ REMOTE_HOST=`echo ${REMOTE_HOST} | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1
     # check if the container exists
     if ! /usr/bin/docker inspect "${CONTAINER_NAME}" &> /dev/null; then
 	# create new container
-	CONTAINER_ID=$(/usr/bin/docker run --name ${CONTAINER_NAME} -h ${HOSTNAME} -e "REMOTE_HOST=${REMOTE_HOST}" -m ${MEM_LIMIT} -d -i honeypot ) ##/sbin/init)
+	CONTAINER_ID=$(/usr/bin/docker run --name ${CONTAINER_NAME} -h ${HOSTNAME}.${DOMAIN} -e "REMOTE_HOST=${REMOTE_HOST}" -m ${MEM_LIMIT} -d -i honeypot ) ##/sbin/init)
         /usr/bin/docker exec -itd ${CONTAINER_NAME} rm /etc/resolv.conf
         /usr/bin/docker exec -itd ${CONTAINER_NAME} cp /root/resolv.conf /etc:resolv.conf
         /usr/bin/docker exec -itd ${CONTAINER_NAME} echo "Admin123#" | bash /root/join-ad.sh "reader"

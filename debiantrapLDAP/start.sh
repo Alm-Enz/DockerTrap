@@ -23,8 +23,7 @@ echo 'service rsyslog start > /dev/null 2>&1' >> /root/.profile
 echo '*.* @@172.17.0.1:514' >> /etc/rsyslog.conf
 service rsyslog restart > /dev/null 2>&1
 
-hostnamectl set-hostname debservstorage.deceptive.local
-echo '$(hostname -I | awk "{print $1}" debservstorage.deceptive.local debservstorage)' >> /etc/hosts
+echo '$(hostname -I | awk "{print $1}" debian.deceptive.local debian)' >> /etc/hosts
 echo '192.168.89.130 ad.deceptive.local ad' >> /etc/hosts
 sed -i 's/pool/#pool/' /etc/ntp.conf
 echo /tmp/LDAP/ntp.conf >> /etc/ntp.conf
