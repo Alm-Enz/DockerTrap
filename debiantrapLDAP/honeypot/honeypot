@@ -16,6 +16,8 @@ REMOTE_HOST=`echo ${REMOTE_HOST} | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1
     if ! /usr/bin/docker inspect "${CONTAINER_NAME}" &> /dev/null; then
 	# create new container
 	CONTAINER_ID=$(/usr/bin/docker run --name ${CONTAINER_NAME} -h ${HOSTNAME} -e "REMOTE_HOST=${REMOTE_HOST}" -m ${MEM_LIMIT} -d -i honeypot ) ##/sbin/init)
+        docker exec -itd 'rm /etc/resolv.conf'
+        docker exec -itd 'cp /root/resolv.conf /etc:resolv.conf'
         docker exec -itd 'echo "Admin123#" | bash /root/join-ad.sh "reader"'
 	CONTAINER_IP=$(/usr/bin/docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CONTAINER_ID})
         PROCESS_ID=$(/usr/bin/docker inspect --format '{{ .State.Pid }}' ${CONTAINER_ID})
@@ -41,6 +43,8 @@ REMOTE_HOST=`echo ${REMOTE_HOST} | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1
 	# start container if exited and grab the cid
         /usr/bin/docker start "${CONTAINER_NAME}" &> /dev/null
         CONTAINER_ID=$(/usr/bin/docker inspect --format '{{ .Id }}' "${CONTAINER_NAME}")
+        docker exec -itd 'rm /etc/resolv.conf'
+        docker exec -itd 'cp /root/resolv.conf /etc:resolv.conf'
         docker exec -itd 'echo "Admin123#" | bash /root/join-ad.sh "reader"'
 	CONTAINER_IP=$(/usr/bin/docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CONTAINER_ID})
 

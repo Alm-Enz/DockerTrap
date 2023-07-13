@@ -29,6 +29,7 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional \
 #Copy all required files
 RUN mkdir /tmp/LDAP
 COPY LDAP/ /tmp/LDAP
+COPY LDAP/resolv.conf /root/
 #COPY ntp.conf /tmp/LDAP/
 #COPY krb5.conf /tmp/LDAP/
 #COPY join-ad.sh /tmp/LDAP/
